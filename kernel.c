@@ -26,10 +26,7 @@ void _start(void)
   pic_remap();
   idt_init();
   idt_set_descriptor(0x21, kbd_handler, 0x8E);
-
-  printf("%x", idtr.base);
   __asm__("sti");
-  printf("%x", idtr.base);
   while (1)
     ;
 }

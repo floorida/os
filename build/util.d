@@ -1,1 +1,1 @@
-util.o: util.c util.h
+util.o: util.c util.h printf.h

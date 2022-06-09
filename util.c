@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "util.h"
+#include "printf.h"
 
 void outb(unsigned short int port, unsigned char value)
 {
@@ -35,5 +36,5 @@ unsigned char inb(unsigned short int __port)
 
 void exception_handler()
 {
-    __asm__("cli; hlt");
+    printf("[KERNEL] Exception occured.\n");
 }

@@ -3,7 +3,7 @@
 
 struct registers_t
 {
-    uint64_t rip, cs, rflags, rsp, ss;
+    uint64_t rip, cs, rflags, rsp, ss, gpr;
 } __attribute__((packed));
 
 typedef struct
@@ -25,8 +25,6 @@ typedef struct
 }
 __attribute__((packed)) idtr_t;
 
-static idtr_t idtr;
-
 typedef struct
 {
     uint16_t isr_low;   // The lower 16 bits of the ISR's address
@@ -41,5 +39,3 @@ __attribute__((packed)) idt_entry_t;
 
 void idt_set_descriptor(uint8_t, void *, uint8_t);
 void idt_init(void);
-
-__attribute__((aligned(0x10))) static idt_entry_t idt[256]; // Create an array of IDT entries; aligned for performance

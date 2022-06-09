@@ -3,6 +3,9 @@
 #include "util.h"
 #include "idt.h"
 
+__attribute__((aligned(0x10))) idt_entry_t idt[256]; // Create an array of IDT entries; aligned for performance
+idtr_t idtr;
+
 void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
 {
     idt_desc_t *descriptor = &idt[vector];
@@ -18,6 +21,7 @@ void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
 
 void idt_init()
 {
+
     idtr.base = (uintptr_t)&idt[0];
     idtr.limit = (uint16_t)sizeof(idt_desc_t) * 256 - 1;
 
