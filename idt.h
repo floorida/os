@@ -3,7 +3,7 @@
 
 struct registers_t
 {
-    uint64_t rip, cs, rflags, rsp, ss, gpr;
+    uint64_t rip, cs, rflags, rsp, ss;
 } __attribute__((packed));
 
 typedef struct
