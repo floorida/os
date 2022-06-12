@@ -10,6 +10,29 @@ void outb(unsigned short int port, unsigned char value)
             : "a"(value), "Nd"(port));
 }
 
+void pic_eoi()
+{
+    outb(0x20, 0x20);
+}
+
+void pic_unmask(unsigned char IRQline)
+{
+    uint16_t port;
+    uint8_t value;
+
+    if (IRQline < 8)
+    {
+        port = PIC1_DATA;
+    }
+    else
+    {
+        port = PIC2_DATA;
+        IRQline -= 8;
+    }
+    value = inb(port) & ~(1 << IRQline);
+    outb(port, value);
+}
+
 void pic_remap()
 {
     outb(0x20, 0x11);
@@ -36,5 +59,6 @@ unsigned char inb(unsigned short int __port)
 
 void exception_handler()
 {
-    printf("[KERNEL] Exception occured.\n");
+    printf("[KERNEL] Exception occured. Halting.\n");
+    __asm__("cli; hlt");
 }

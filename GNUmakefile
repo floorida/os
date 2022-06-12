@@ -73,7 +73,8 @@ $(KERNEL): $(OBJ)
 # Compilation rules for *.c files.
 -include $(HEADER_DEPS)
 %.o: %.c limine.h
-	$(CC) $(CFLAGS) $(INTERNALCFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INTERNALCFLAGS) -DPRINTF_DISABLE_SUPPORT_EXPONENTIAL \
+	-DPRINTF_DISABLE_SUPPORT_FLOAT -c $< -o $@	
 
 %.o: %.asm
 	nasm -F dwarf -g -felf64 $< -o $@
