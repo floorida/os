@@ -59,6 +59,5 @@ unsigned char inb(unsigned short int __port)
 
 void exception_handler()
 {
-    printf("[KERNEL] Exception occured. Halting.\n");
-    __asm__("cli; hlt");
+    printf("[KERNEL] interrupt received.\n");
 }

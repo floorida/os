@@ -38,8 +38,8 @@ void idt_init()
         idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
     }
 
-    pic_unmask(2);
-    idt_set_descriptor(0x21, kbd_handler, 0x8E);
+    pic_unmask(0);
+    idt_set_descriptor(0x20, kbd_handler, 0x8E);
 
     __asm__("lidt %0" ::"m"(idtr));
 };
